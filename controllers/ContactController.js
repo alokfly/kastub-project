@@ -3,7 +3,7 @@ const Contact = require("../models/Contact");
 module.exports.addContact = async (req, res) => {
   const { name, email, message } = req.body;
   try {
-    const support = await Support.create({
+    const support = await Contact.create({
       name,
       email,
       message,
