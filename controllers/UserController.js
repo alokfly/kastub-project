@@ -84,8 +84,8 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.updateProfile = async (req, res) => {
-  let { full_name, email, phonno } = req.body;
-  let profile = req.file ? req.file.filename : null;
+  let { full_name, email, phonno, currentImage } = req.body;
+  let profile = req.file ? req.file.filename : currentImage;
   try {
     const response = await User.findByIdAndUpdate(
       {
@@ -109,7 +109,7 @@ module.exports.getUserDetail = async (req, res) => {
     const response = await User.find({
       _id: ObjectId(req.params.id),
     });
-    return res.status(200).json({ response });
+    return res.status(200).json(response);
   } catch (error) {
     return res.status(404).json(error);
   }
