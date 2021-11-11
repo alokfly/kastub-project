@@ -1,4 +1,5 @@
 const { body, validationResult } = require("express-validator");
+const ObjectId = require("mongodb").ObjectID;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -79,5 +80,37 @@ module.exports.login = async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ errors: error });
+  }
+};
+
+module.exports.updateProfile = async (req, res) => {
+  let { full_name, email, phonno } = req.body;
+  let profile = req.file ? req.file.filename : null;
+  try {
+    const response = await User.findByIdAndUpdate(
+      {
+        _id: ObjectId(req.params.id),
+      },
+      {
+        full_name,
+        email,
+        phonno,
+        image: profile,
+      }
+    );
+    return res.status(200).json({ msg: "User has been updated" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports.getUserDetail = async (req, res) => {
+  try {
+    const response = await User.find({
+      _id: ObjectId(req.params.id),
+    });
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(404).json(error);
   }
 };
