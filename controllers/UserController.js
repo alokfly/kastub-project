@@ -109,7 +109,7 @@ module.exports.getUserDetail = async (req, res) => {
     const response = await User.find({
       _id: ObjectId(req.params.id),
     });
-    return res.status(200).json(response);
+    return res.status(200).json({ response });
   } catch (error) {
     return res.status(404).json(error);
   }

@@ -20,6 +20,10 @@ const userSchema = new Schema(
     image: {
       type: String,
     },
+    successCode: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
