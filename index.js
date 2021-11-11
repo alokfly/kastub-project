@@ -6,6 +6,7 @@ const cors = require("cors");
 const userRouter = require("./routes/userRoutes");
 const supportRouter = require("./routes/supportRoutes");
 const contactRouter = require("./routes/ContactRoutes");
+const propertyRouter = require("./routes/propertyRoutes");
 
 require("dotenv").config();
 const app = express();
@@ -31,6 +32,7 @@ app.use(bodyParser.json());
 app.use("/", userRouter);
 app.use("/", supportRouter);
 app.use("/", contactRouter);
+app.use("/", propertyRouter);
 
 const PORT = process.env.PORT || 5000;
 
